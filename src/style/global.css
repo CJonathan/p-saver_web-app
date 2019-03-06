@@ -1,0 +1,15 @@
+.main {
+    margin-top: 90px;
+}
+.min-height{
+    height: 120px;
+}
+.not-caught{
+    margin: 20px 0;
+}
+.not-caught input {
+    margin-right: 6px;
+}
+img.full-width{
+    width:100%;
+}

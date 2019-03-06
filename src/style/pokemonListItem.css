@@ -1,0 +1,36 @@
+.image {
+    background-color: #dcdcdc30 !important;
+    border-radius: 5px;
+}
+
+.float-right{
+    float:right;
+}
+
+.isCaught .card {
+    background-color: #55bd5529!important;
+}
+
+.isNotCatchable .card {
+    background-color: #ff000033!important;
+}
+
+.input-height{
+    height:19px!important;
+}
+
+.notes label {
+    margin-right: 10px;
+}
+
+.minus-button {
+    padding-right: 10px;
+}
+
+.showForm{
+    display:block;
+}
+
+.hideForm{
+    display:none;
+}
