@@ -1,15 +1,48 @@
-.main {
-    margin-top: 90px;
-}
-.min-height{
+.min-height {
     height: 120px;
 }
-.not-caught{
+
+.main{
+    margin-top: 80px;
+}
+
+.not-caught {
     margin: 20px 0;
 }
+
 .not-caught input {
     margin-right: 6px;
 }
-img.full-width{
-    width:100%;
+
+img.full-width {
+    width: 100%;
+}
+
+.isCaught .card {
+    background-color: #55bd5529 !important;
+}
+
+.done {
+    background-color: #55bd5529 !important;
+}
+.img-zoom-lens {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    /*set the size of the lens:*/
+    width: 40px;
+    height: 40px;
+}
+#image-map {
+    vertical-align: top;
+}
+.img-zoom-container {
+    position: relative;
+}
+
+.img-zoom-result {
+    border: 1px solid #d4d4d4;
+    /*set the size of the result div:*/
+    display:inline-block;
+    width: 600px;
+    height: 600px;
 }
