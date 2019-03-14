@@ -34,7 +34,7 @@ class PokemonListCardItem extends React.Component {
     return (
       <div onMouseEnter={this.onMouseEnter}
            onMouseLeave={this.onMouseLeave}
-           className={"bank-item " + (pkmn.isCaught ? 'isCaught' : 'isNotCaught')}>
+           className={"bank-item " + (pkmn.isCaught ? 'isCaught' : pkmn.isNotCatchable ? 'isNotCatchable isNotCaught' : 'isNotCaught')}>
         <div className="bank-card">
           <img onClick={() => onAnchorClick(pkmn._id, pkmn.nbCaught + 1, pkmn.isCaught)}
                onContextMenu={(e) => this.onContextMenu(e, pkmn._id, pkmn.nbCaught - 1, pkmn.isCaught)}

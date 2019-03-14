@@ -85,7 +85,7 @@ class PokemonList extends React.Component {
              onChange={this.onInputChange} />
         <label htmlFor={'not-caught-checkbox'}>Not Caught only ({PokemonList.filterUnCaught(this.props.pokemons)})</label>
     </div>;
-    return this.props.parent === 'pokedex' ? html : '';
+    return this.state.listType === 'card' && this.props.parent === 'pokedex' ? html : '';
   }
 
   onFilterClick = (e, type) => {

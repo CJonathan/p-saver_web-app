@@ -24,6 +24,11 @@
     background-color: #55bd5529!important;
 }
 
+.isNotCatchable .bank-card {
+    background-color: #ff000033!important;
+}
+
+
 .isNotCaught .bank-card img{
     filter: brightness(0);
     opacity: .1;
