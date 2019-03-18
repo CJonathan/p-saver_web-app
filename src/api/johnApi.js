@@ -1,5 +1,6 @@
 import axios from 'axios';
+import { baseURL } from '../../env/api';
 
 export default axios.create({
-  baseURL: 'http://192.168.2.116:3200/api/v1',
+  baseURL: `${baseURL}/api/v1`,
 })
