@@ -1,1 +1,1 @@
-export const baseURL = 'TEMP_VALUE';
+export const baseURL = 'https://dgozpa3e58.execute-api.eu-central-1.amazonaws.com/beta';

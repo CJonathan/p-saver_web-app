@@ -1,5 +1,6 @@
 import React from 'react';
 import johnApi from '../../api/johnApi';
+import {endpoints} from '../../config';
 
 import PokemonList from "../lists/PokemonList";
 import { findWithAttr } from "../../helpers/filters";
@@ -18,10 +19,11 @@ class Pokedex extends React.Component {
   state = {
     isLoading: false,
     pokemons: [],
+    region: 'kanto'
   };
 
   componentDidMount = () => {
-    this.fetchDataFromDb('kanto');
+    this.fetchDataFromDb(this.state.region);
   };
 
   toggleLoading = () => {
@@ -39,7 +41,7 @@ class Pokedex extends React.Component {
   };
 
   onNoteSubmit = async(id, note) => {
-    const res = await johnApi.patch(`/pokemon/${id}`, { note });
+    const res = await johnApi.patch(`/pokedex/${id}`, { note });
     this.replaceInArray(id, res.data.pokemon);
   };
 
@@ -60,16 +62,16 @@ class Pokedex extends React.Component {
   };
 
   saveDateInDb = async(id, nbCaught, isCaught, isNotCatchable, registrationDate) => {
-    const res = await johnApi.patch(`/pokemon/${id}`, { nbCaught, isCaught, isNotCatchable, registrationDate });
+    const res = await johnApi.patch(`/pokedex/${id}`, { nbCaught, isCaught, isNotCatchable, registrationDate });
     this.replaceInArray(id, res.data.pokemon);
   };
 
-  fetchDataFromDb = async(pkdx) => {
+  fetchDataFromDb = async(region) => {
     this.toggleLoading();
-    const res = await johnApi.get(`/pokemon?region=${pkdx.toLowerCase()}`);
+    const res = await johnApi.get(`${endpoints.getPokedex}?region=${region.toLowerCase()}`);
     this.setState({
+      region: region,
       pokemons: res.data.pokemons,
-      region: res.data.region,
       isLoading: false,
     });
   };
