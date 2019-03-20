@@ -24,9 +24,9 @@ class PokemonListCardItem extends React.Component {
     });
   };
 
-  onContextMenu = (e, id, total, isCaught) => {
+  onContextMenu = (e, id, region, total, isCaught) => {
     e.preventDefault();
-    this.props.onAnchorClick(id, total, isCaught);
+    this.props.onAnchorClick(id, region, total, isCaught);
   };
 
   render() {
@@ -37,7 +37,7 @@ class PokemonListCardItem extends React.Component {
            className={"bank-item " + (pkmn.isCaught ? 'isCaught' : pkmn.isNotCatchable ? 'isNotCatchable isNotCaught' : 'isNotCaught')}>
         <div className="bank-card">
           <img onClick={() => onAnchorClick(pkmn._id, pkmn.nbCaught + 1, pkmn.isCaught)}
-               onContextMenu={(e) => this.onContextMenu(e, pkmn._id, pkmn.nbCaught - 1, pkmn.isCaught)}
+               onContextMenu={(e) => this.onContextMenu(e, pkmn._id, pkmn.region, pkmn.nbCaught - 1, pkmn.isCaught)}
                className="tiny ui image"
                alt={pkmn.pokemon.name}
                src={this.state.avatar} />

@@ -32,12 +32,12 @@ class Pokedex extends React.Component {
     });
   };
 
-  onAnchorClick = async(id, nc, ic) => {
+  onAnchorClick = async(id, region, nc, ic) => {
     let nbCaught = nc <= -1 ? -1 : nc;
     let isCaught = nbCaught > 0;
     let isNotCatchable = nbCaught === -1;
     let registrationDate = nbCaught === 1 && ic === false ? new Date() : nbCaught === 0 ? null : undefined;
-    this.saveDateInDb(id, nbCaught, isCaught, isNotCatchable, registrationDate);
+    this.saveDateInDb(id, region, nbCaught, isCaught, isNotCatchable, registrationDate);
   };
 
   onNoteSubmit = async(id, note) => {
@@ -61,8 +61,8 @@ class Pokedex extends React.Component {
     this.fetchDataFromDb(e.target.dataset.pkdx);
   };
 
-  saveDateInDb = async(id, nbCaught, isCaught, isNotCatchable, registrationDate) => {
-    const res = await johnApi.patch(`/pokedex/${id}`, { nbCaught, isCaught, isNotCatchable, registrationDate });
+  saveDateInDb = async(id, region, nbCaught, isCaught, isNotCatchable, registrationDate) => {
+    const res = await johnApi.patch(`/pokedex/${id}`, { region, nbCaught, isCaught, isNotCatchable, registrationDate });
     this.replaceInArray(id, res.data.pokemon);
   };
 
