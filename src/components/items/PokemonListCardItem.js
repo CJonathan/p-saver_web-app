@@ -119,13 +119,13 @@ class PokemonListCardItem extends React.Component {
           <div className="extra content">
             <div className="ui label">
               <a
-                onClick={() => onAnchorClick(pkmn._id, pkmn.nbCaught - 1, pkmn.isCaught)}
+                onClick={() => onAnchorClick(pkmn._id, pkmn.region, pkmn.nbCaught - 1, pkmn.isCaught)}
                 className="minus-button">
                 <i className="minus icon" />
               </a>
               Caught: {pkmn.nbCaught}
               <a
-                onClick={() => onAnchorClick(pkmn._id, pkmn.nbCaught + 1, pkmn.isCaught)}
+                onClick={() => onAnchorClick(pkmn._id, pkmn.region, pkmn.nbCaught + 1, pkmn.isCaught)}
                 className="detail">
                 <i className="plus icon" />
               </a>

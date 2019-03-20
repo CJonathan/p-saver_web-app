@@ -60,7 +60,7 @@ class AddEntry extends React.Component {
       return (
         <PokemonCrawlerList
           region={this.state.region}
-          destination={this.state.isChecked ? '/bank' : '/pokemon'}
+          destination={this.state.isChecked ? '/pokebank' : '/pokedex'}
           pokemons={this.state.pokemons}
         />
       );

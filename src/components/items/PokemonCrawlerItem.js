@@ -18,8 +18,8 @@ class PokemonCrawlerItem extends React.Component {
         },
         region: '',
         isCaught: false,
+        isNotCatchable: false,
         nbCaught: 0,
-        registrationDate: null,
       },
     };
   }
