@@ -7,6 +7,6 @@ function findWithAttr(array, attr, value){
     }
   }
   return -1;
-};
+}
 
 export { findWithAttr };

@@ -16,7 +16,7 @@ const shortMonth = [
 // return Okt 26 2019
 
 function monthDayYeahShort(d) {
-  if(d === null){
+  if(d === null || d === undefined){
     return ''
   }
   let date = new Date(d);

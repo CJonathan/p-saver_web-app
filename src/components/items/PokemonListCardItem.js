@@ -23,12 +23,12 @@ const config = {
 };
 
 class PokemonListCardItem extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
       isShown: false,
       note: this.props.pkmn.note || '',
-      avatar: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.props.pkmn.entry}.png`
     };
   }
 
@@ -53,7 +53,7 @@ class PokemonListCardItem extends React.Component {
   onFormSubmit = (e) => {
     e.preventDefault();
     this.toggleNotes();
-    this.props.onNoteSubmit(this.props.pkmn._id, this.state.note.trim());
+    this.props.onNoteSubmit(this.props.pkmn, this.state.note.trim());
   };
 
   onInputChange = (e) => {
@@ -88,7 +88,7 @@ class PokemonListCardItem extends React.Component {
             className="field"
             onClick={this.onNoteClick}>
             <label>Note:</label>
-            <i className="meta">{this.props.pkmn.note || "write about pokemon..."}</i>
+            <i className="meta">{this.state.note || "write about pokemon..."}</i>
           </div>
         </div>
       );
@@ -97,20 +97,21 @@ class PokemonListCardItem extends React.Component {
 
   render() {
     let { pkmn, onAnchorClick } = this.props;
+    let { name, avatar, meta, about, types } = pkmn.pokemon;
     return (
       <div className={"column " + (pkmn.isCaught ? 'isCaught' : '') + (pkmn.isNotCatchable ? 'isNotCatchable' : '')}>
         <div className={"ui fluid card"}>
           <div className="content">
-            <img className="left floated tiny ui image" alt={pkmn.pokemon.name} src={this.state.avatar} />
+            <img className="left floated tiny ui image" alt={name} src={avatar} />
             <div className="header">
-              #{pkmn.entry} {capitalize(pkmn.pokemon.name)}
+              #{pkmn.entry} {capitalize(name)}
             </div>
             <div className="meta">
-              {pkmn.pokemon.meta}
+              {meta}
             </div>
-            {PokemonListCardItem.getTypes(pkmn.pokemon.types)}
+            {PokemonListCardItem.getTypes(types.values)}
             <div className="description min-height">
-              {pkmn.pokemon.about}
+              {about}
             </div>
             <div>
               {this.getInput()}

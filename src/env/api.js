@@ -1,1 +1,1 @@
-export const baseURL = 'https://atpkv05hm8.execute-api.eu-central-1.amazonaws.com/beta/pokedex';
+export const baseURL = 'https://atpkv05hm8.execute-api.eu-central-1.amazonaws.com/beta';
