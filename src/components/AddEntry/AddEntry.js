@@ -1,13 +1,13 @@
 import React from 'react';
 import pokeApi from '../../api/pokeapi';
 
-import PokemonCrawlerList from '../lists/PokemonCrawlerList';
+import PokemonCrawlerList from '../Crawler/PokemonCrawlerList';
 
 const config = {
   'kanto': 1,
   'johto': 2,
   'hoenn': 3,
-  'sinnoh': 4
+  'sinnoh': 4,
 };
 
 class AddEntry extends React.Component {

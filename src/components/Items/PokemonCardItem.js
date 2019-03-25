@@ -22,7 +22,7 @@ const config = {
   dragon: '#7038f8',
 };
 
-class PokemonListCardItem extends React.Component {
+class PokemonCardItem extends React.Component {
 
   constructor(props) {
     super(props);
@@ -31,9 +31,9 @@ class PokemonListCardItem extends React.Component {
       note: this.props.pkmn.note || '',
     };
   }
-
   static getTypes(types) {
-    return types.map(e => {
+    let tps = types.value ? types.value : types;
+    return tps.map(e => {
       return (
         <a className="item" key={e}>
           <div style={{ backgroundColor: config[e], color: 'white' }} className="ui horizontal label">{e}</div>
@@ -45,9 +45,13 @@ class PokemonListCardItem extends React.Component {
   onNoteClick = () => {
     this.toggleNotes();
   };
-
   toggleNotes = () => {
     this.setState({ isShown: !this.state.isShown });
+  };
+  onInputChange = (e) => {
+    this.setState({
+      note: e.target.value,
+    });
   };
 
   onFormSubmit = (e) => {
@@ -56,11 +60,9 @@ class PokemonListCardItem extends React.Component {
     this.props.onNoteSubmit(this.props.pkmn, this.state.note.trim());
   };
 
-  onInputChange = (e) => {
-    this.setState({
-      note: e.target.value,
-    });
-  };
+  onUpdateClick(pkmn, nbCaught, earlyExit){
+    this.props.onUpdateCaughtNb(pkmn, nbCaught, earlyExit)
+  }
 
   getInput() {
     if(this.state.isShown) {
@@ -96,7 +98,7 @@ class PokemonListCardItem extends React.Component {
   }
 
   render() {
-    let { pkmn, onAnchorClick } = this.props;
+    let { pkmn } = this.props;
     let { name, avatar, meta, about, types } = pkmn.pokemon;
     return (
       <div className={"column " + (pkmn.isCaught ? 'isCaught' : '') + (pkmn.isNotCatchable ? 'isNotCatchable' : '')}>
@@ -109,7 +111,7 @@ class PokemonListCardItem extends React.Component {
             <div className="meta">
               {meta}
             </div>
-            {PokemonListCardItem.getTypes(types.values)}
+            {PokemonCardItem.getTypes(types)}
             <div className="description min-height">
               {about}
             </div>
@@ -120,13 +122,13 @@ class PokemonListCardItem extends React.Component {
           <div className="extra content">
             <div className="ui label">
               <a
-                onClick={() => onAnchorClick(pkmn._id, pkmn.region, pkmn.nbCaught - 1, pkmn.isCaught)}
+                onClick={() => this.onUpdateClick(pkmn, pkmn.nbCaught - 1, pkmn.nbCaught === -1 )}
                 className="minus-button">
                 <i className="minus icon" />
               </a>
               Caught: {pkmn.nbCaught}
               <a
-                onClick={() => onAnchorClick(pkmn._id, pkmn.region, pkmn.nbCaught + 1, pkmn.isCaught)}
+                onClick={() => this.onUpdateClick(pkmn, pkmn.nbCaught + 1)}
                 className="detail">
                 <i className="plus icon" />
               </a>
@@ -141,4 +143,4 @@ class PokemonListCardItem extends React.Component {
   }
 }
 
-export default PokemonListCardItem;
+export default PokemonCardItem;

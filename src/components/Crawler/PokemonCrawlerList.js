@@ -1,5 +1,5 @@
 import React from 'react';
-import PokemonCrawlerItem from "../items/PokemonCrawlerItem";
+import PokemonCrawlerItem from "./PokemonCrawlerItem";
 import { capitalize } from "../../helpers/text";
 
 const PokemonCrawlerList = ({ region, pokemons, destination }) => {

@@ -1,36 +1,16 @@
 import React from 'react';
-import PokemonBankListItem from '../items/PokemonBankListItem';
-import PokemonListCardItem from '../items/PokemonListCardItem';
+import PokemonIconItem from '../Items/PokemonIconItem';
+import PokemonCardItem from '../Items/PokemonCardItem';
 import { capitalize } from "../../helpers/text";
-
+import { filterUnCaught, calculateCaught } from "../../helpers/filters"
 class PokemonList extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       isChecked: false,
-      listType: this.props.listType,
       search: '',
     };
-  }
-
-  static filterCaught(pkms) {
-    return pkms.filter(e => {
-      return e.isCaught;
-    });
-  };
-
-  static filterUnCaught(pkms) {
-    let list = pkms.filter(e => {
-      return !e.isCaught;
-    });
-    return list.filter(e => {
-      return !e.isNotCatchable;
-    }).length;
-  }
-
-  static calculateCaught(pkms) {
-    return PokemonList.filterCaught(pkms).length;
   }
 
   onInputChange = (ev) => {
@@ -38,38 +18,43 @@ class PokemonList extends React.Component {
       isChecked: ev.target.checked,
     });
   };
-
   onSearchChange = (ev) => {
     this.setState({
       search: ev.target.value.toLowerCase(),
     });
   };
 
+  onNoteSubmit = (pokemon, note) => {
+    this.props.updateNote(pokemon, note)
+  };
+
+  onUpdateCaughtNb = (pokemon, nbCaught, earlyExit) => {
+    this.props.updateCaughtNb(pokemon, nbCaught, earlyExit)
+  };
+
   getList() {
     let list = this.props.pokemons.filter(pokemon => this.state.search === '' || pokemon.pokemon.name.toLowerCase().includes(this.state.search));
-    if(this.state.listType === 'list'){
+
+    if(this.props.listType === 'icon') {
       return list.map(pokemon => {
         return (
-          <PokemonBankListItem
+          <PokemonIconItem
             key={pokemon._id}
-            onNoteSubmit={this.props.onNoteSubmit}
-            onAnchorClick={this.props.onAnchorClick}
-            region={this.props.region}
             pkmn={pokemon}
+            onUpdateCaughtNb={this.onUpdateCaughtNb}
           />
         );
       });
-    } else {
+    } else if(this.props.listType === 'card') {
       list = list.filter(pokemon => !this.state.isChecked || !pokemon.isCaught);
       list = list.filter(pokemon => !this.state.isChecked || !pokemon.isNotCatchable);
       return list.map(pokemon => {
         return (
-          <PokemonListCardItem
+          <PokemonCardItem
             key={pokemon._id}
-            onNoteSubmit={this.props.onNoteSubmit}
-            onAnchorClick={this.props.onAnchorClick}
-            region={this.props.region}
             pkmn={pokemon}
+            onNoteSubmit={this.onNoteSubmit}
+            onUpdateCaughtNb={this.onUpdateCaughtNb}
           />
         );
       });
@@ -80,26 +65,20 @@ class PokemonList extends React.Component {
     let html =
       <div className="not-caught">
         <input type="checkbox"
-             id="not-caught-checkbox"
-             checked={this.state.isChecked}
-             onChange={this.onInputChange} />
-        <label htmlFor={'not-caught-checkbox'}>Not Caught only ({PokemonList.filterUnCaught(this.props.pokemons)})</label>
-    </div>;
-    return this.state.listType === 'card' && this.props.parent === 'pokedex' ? html : '';
+               id="not-caught-checkbox"
+               checked={this.state.isChecked}
+               onChange={this.onInputChange} />
+        <label htmlFor={'not-caught-checkbox'}>Not Caught only ({filterUnCaught(this.props.pokemons)})</label>
+      </div>;
+    return this.props.listType === 'card' && this.props.parent === 'pokedex' ? html : '';
   }
 
-  onFilterClick = (e, type) => {
-    this.setState({
-      listType: type
-    })
-  };
-
   render() {
-    const isListActive = this.state.listType === 'list' ? 'active' : '';
-    const isCardActive = this.state.listType === 'card' ? 'active' : '';
-    const listType = this.state.listType === 'list' ? 'centered' : 'three column';
-    const nbPokemonCaught = PokemonList.calculateCaught(this.props.pokemons);
-    const { region, totalEntry, pokemons, totalCaught} = this.props;
+    const isListActive = this.props.listType === 'icon' ? 'active' : '';
+    const isCardActive = this.props.listType === 'card' ? 'active' : '';
+    const listType = this.props.listType === 'icon' ? 'centered' : 'three column';
+    const nbPokemonCaught = calculateCaught(this.props.pokemons);
+    const { region, totalEntry, pokemons, totalCaught } = this.props;
 
     return (
       <div className="pokemon-list">
@@ -113,15 +92,15 @@ class PokemonList extends React.Component {
         <form className="ui form">
           <div className="field">
             <div className="ui small basic icon buttons float-right">
-              <button className={"ui button " + isListActive }
+              <button className={"ui button " + isListActive}
                       type="button"
-                      onClick={(e) => this.onFilterClick(e, 'list')}>
-                <i className="list icon"/>
+                      onClick={() => this.props.changeListType('icon')}>
+                <i className="list icon" />
               </button>
-              <button className={"ui button " + isCardActive }
+              <button className={"ui button " + isCardActive}
                       type="button"
-                      onClick={(e) => this.onFilterClick(e, 'card')}>
-                <i className="address card icon"/>
+                      onClick={() => this.props.changeListType('card')}>
+                <i className="address card icon" />
               </button>
             </div>
           </div>
@@ -137,6 +116,6 @@ class PokemonList extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default PokemonList;
