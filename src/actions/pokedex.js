@@ -1,5 +1,6 @@
 import johnApi from '../api/johnApi';
 import { endpoints } from '../config';
+import { getToken } from '../helpers/token';
 import { prepRequestForPokedex, replacePokemonInPokedex } from "../helpers/request";
 
 const updatePokedex = (region, pokedex) => async(dispatch) => {
@@ -46,6 +47,7 @@ export const updateCaughtNb = (pokemon, nc, earlyExit) => async(dispatch, getSta
   let { nbCaught, isNotCatchable, isCaught, registrationDate } = prepRequestForPokedex(pokemon, nc);
 
   const response = await johnApi.patch(endpoints.patchPokedex + `/${pokemon._id}`, {
+    token: getToken(),
     region: pokemon.region,
     entry: pokemon.entry,
     nbCaught,
@@ -63,6 +65,7 @@ export const updateNote = (pokemon, note) => async(dispatch, getState) => {
   let state = getState();
   let pokedex = state.pokedex[pokemon.region];
   const response = await johnApi.patch(endpoints.patchPokedex + `/${pokemon._id}`, {
+    token: getToken(),
     region: pokemon.region,
     entry: pokemon.entry,
     note,

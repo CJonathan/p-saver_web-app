@@ -42,10 +42,10 @@ class Pokedex extends React.Component {
     return (
       <div>
         <div className="ui four item menu regions">
-          <a onClick={this.onMenuClick} data-pkdx="kanto" className="item active">Kanto</a>
-          <a onClick={this.onMenuClick} data-pkdx="johto" className="item">Johto</a>
-          <a onClick={this.onMenuClick} data-pkdx="hoenn" className="item">Hoenn</a>
-          <a onClick={this.onMenuClick} data-pkdx="sinnoh" className="item">Sinnoh</a>
+          <a onClick={this.onMenuClick} data-pkdx="kanto" className={"item " + (this.props.selectedRegion === 'kanto' ? 'active' : '')}>Kanto</a>
+          <a onClick={this.onMenuClick} data-pkdx="johto" className={"item " + (this.props.selectedRegion === 'johto' ? 'active' : '')}>Johto</a>
+          <a onClick={this.onMenuClick} data-pkdx="hoenn" className={"item " + (this.props.selectedRegion === 'hoenn' ? 'active' : '')}>Hoenn</a>
+          <a onClick={this.onMenuClick} data-pkdx="sinnoh" className={"item " + (this.props.selectedRegion === 'sinnoh' ? 'active' : '')}>Sinnoh</a>
         </div>
         {this.renderContent()}
       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import pokeApi from '../../api/pokeapi';
 import johnApi from '../../api/johnApi';
+import { getToken } from '../../helpers/token';
 
 class PokemonCrawlerItem extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class PokemonCrawlerItem extends React.Component {
     this.state = {
       done: false,
       data: {
+        token: getToken(),
         entry: '',
         pokemon: {
           name: '',

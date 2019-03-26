@@ -1,5 +1,6 @@
 import johnApi from '../api/johnApi';
 import { endpoints } from '../config';
+import { getToken } from '../helpers/token';
 import { prepRequestForPokebank, replacePokemonInPokedex } from "../helpers/request";
 
 const updatePokedex = (region, pokedex) => async(dispatch) => {
@@ -41,9 +42,11 @@ const setAmountInStore = (totalEntry, totalCaught) => async (dispatch) => {
   dispatch({ type: 'SET_POKEBANK_CURRENT_COUNT', payload: totalCaught });
 };
 
-export const fetchAmountFromDb = () => async(dispatch) => {
-  const response = await johnApi.get(endpoints.count);
-  dispatch(setAmountInStore(response.data.totalEntry, response.data.totalCaught))
+export const fetchAmountFromDb = () => async(dispatch, getState) => {
+  if(getState().pokebank.totalEntry === 0){
+    const response = await johnApi.get(endpoints.count);
+    dispatch(setAmountInStore(response.data.totalEntry, response.data.totalCaught))
+  }
 };
 
 export const updateCaughtNb = (pokemon, nc, earlyExit) => async(dispatch, getState) => {
@@ -62,6 +65,7 @@ export const updateCaughtNb = (pokemon, nc, earlyExit) => async(dispatch, getSta
   }
 
   const response = await johnApi.patch(endpoints.patchPokebank + `/${pokemon._id}`, {
+    token: getToken(),
     region: pokemon.region,
     entry: pokemon.entry,
     nbCaught,
@@ -79,6 +83,7 @@ export const updateNote = (pokemon, note) => async(dispatch, getState) => {
   let state = getState();
   let pokedex = state.pokebank[pokemon.region];
   const response = await johnApi.patch(endpoints.patchPokebank + `/${pokemon._id}`, {
+    token: getToken(),
     region: pokemon.region,
     entry: pokemon.entry,
     note,
