@@ -53,6 +53,7 @@ export const updateCaughtNb = (pokemon, nc, earlyExit) => async(dispatch, getSta
   let pokedex = state.pokebank[pokemon.region];
 
   let { nbCaught, isNotCatchable, isCaught, registrationDate } = prepRequestForPokebank(pokemon, nc);
+
   if(nbCaught === 1 && pokemon.isCaught === false){
    dispatch(setAmountInStore(state.pokebank.totalEntry, state.pokebank.totalCaught + 1))
   }
