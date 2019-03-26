@@ -32,7 +32,7 @@ class PokemonCardItem extends React.Component {
     };
   }
   static getTypes(types) {
-    let tps = types.value ? types.value : types;
+    let tps = types.values ? types.values : types;
     return tps.map(e => {
       return (
         <a className="item" key={e}>
