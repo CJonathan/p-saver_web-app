@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import johnApi from "../../api/johnApi";
-
 import PokemonList from "../Lists/PokemonList.Pokebank.map";
-import { setRegionAndFetchPokemon, fetchPokedexPerRegion, fetchAmountFromDb } from "../../actions/pokebank";
+import { setRegionAndFetchPokemon, fetchAmountFromDb } from "../../actions/pokebank";
 import { removeClass } from "../../helpers/cssClass";
 
 class Pokebank extends React.Component {
@@ -15,7 +13,7 @@ class Pokebank extends React.Component {
 
   componentDidMount = () => {
     this.props.fetchAmountFromDb();
-    this.props.fetchPokedexPerRegion(this.props.selectedRegion);
+    this.props.setRegionAndFetchPokemon(this.props.selectedRegion);
   };
 
   onMenuClick = (e) => {
@@ -74,4 +72,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setRegionAndFetchPokemon, fetchPokedexPerRegion, fetchAmountFromDb })(Pokebank);
+export default connect(mapStateToProps, { setRegionAndFetchPokemon, fetchAmountFromDb })(Pokebank);

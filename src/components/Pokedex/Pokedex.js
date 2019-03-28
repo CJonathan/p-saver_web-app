@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import PokemonList from "../Lists/PokemonList.Pokedex.map";
-import { setRegionAndFetchPokemon, fetchPokedexPerRegion } from "../../actions/pokedex";
+import { setRegionAndFetchPokemon } from "../../actions/pokedex";
 import { removeClass } from "../../helpers/cssClass";
 
 class Pokedex extends React.Component {
   componentDidMount = () => {
-    this.props.fetchPokedexPerRegion(this.props.selectedRegion);
+    this.props.setRegionAndFetchPokemon(this.props.selectedRegion);
   };
 
   onMenuClick = (e) => {
@@ -62,4 +62,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setRegionAndFetchPokemon, fetchPokedexPerRegion })(Pokedex);
+export default connect(mapStateToProps, { setRegionAndFetchPokemon })(Pokedex);
