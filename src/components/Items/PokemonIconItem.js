@@ -18,7 +18,7 @@ class PokemonIconItem extends React.Component {
       <div className={"bank-item " + (pkmn.isCaught ? 'isCaught' : pkmn.isNotCatchable ? 'isNotCatchable isNotCaught' : 'isNotCaught')}>
         <div className="bank-card">
           <img onClick={() => this.onUpdateClick(pkmn, pkmn.nbCaught + 1)}
-               onContextMenu={(e) => this.onContextMenu(e, pkmn, pkmn.nbCaught - 1, pkmn.nbCaught === 0)}
+               onContextMenu={(e) => this.onContextMenu(e, pkmn, pkmn.nbCaught - 1, pkmn.nbCaught === -1)}
                className="tiny ui image"
                alt={pkmn.pokemon.name}
                src={pkmn.pokemon.avatar} />

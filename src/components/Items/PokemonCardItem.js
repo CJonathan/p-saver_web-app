@@ -31,9 +31,9 @@ class PokemonCardItem extends React.Component {
       note: this.props.pkmn.note || '',
     };
   }
+
   static getTypes(types) {
-    let tps = types.values ? types.values : types;
-    return tps.map(e => {
+    return types.map(e => {
       return (
         <a className="item" key={e}>
           <div style={{ backgroundColor: config[e], color: 'white' }} className="ui horizontal label">{e}</div>
@@ -60,8 +60,8 @@ class PokemonCardItem extends React.Component {
     this.props.onNoteSubmit(this.props.pkmn, this.state.note.trim());
   };
 
-  onUpdateClick(pkmn, nbCaught, earlyExit){
-    this.props.onUpdateCaughtNb(pkmn, nbCaught, earlyExit)
+  onUpdateClick(pkmn, nbCaught, earlyExit) {
+    this.props.onUpdateCaughtNb(pkmn, nbCaught, earlyExit);
   }
 
   getInput() {
@@ -122,7 +122,7 @@ class PokemonCardItem extends React.Component {
           <div className="extra content">
             <div className="ui label">
               <a
-                onClick={() => this.onUpdateClick(pkmn, pkmn.nbCaught - 1, pkmn.nbCaught === -1 )}
+                onClick={() => this.onUpdateClick(pkmn, pkmn.nbCaught - 1, pkmn.nbCaught === -1)}
                 className="minus-button">
                 <i className="minus icon" />
               </a>

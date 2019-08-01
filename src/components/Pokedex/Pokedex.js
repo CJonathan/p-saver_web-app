@@ -37,15 +37,18 @@ class Pokedex extends React.Component {
       return <div>No pokemon found. :( </div>;
     }
   }
-
+r
   render() {
     return (
       <div>
-        <div className="ui four item menu regions">
+        <div className="ui seven item menu regions">
           <a onClick={this.onMenuClick} data-pkdx="kanto" className={"item " + (this.props.selectedRegion === 'kanto' ? 'active' : '')}>Kanto</a>
           <a onClick={this.onMenuClick} data-pkdx="johto" className={"item " + (this.props.selectedRegion === 'johto' ? 'active' : '')}>Johto</a>
           <a onClick={this.onMenuClick} data-pkdx="hoenn" className={"item " + (this.props.selectedRegion === 'hoenn' ? 'active' : '')}>Hoenn</a>
           <a onClick={this.onMenuClick} data-pkdx="sinnoh" className={"item " + (this.props.selectedRegion === 'sinnoh' ? 'active' : '')}>Sinnoh</a>
+          <a onClick={this.onMenuClick} data-pkdx="unova" className={"item " + (this.props.selectedRegion === 'unova' ? 'active' : '')}>Unova</a>
+          <a onClick={this.onMenuClick} data-pkdx="kalos" className={"item " + (this.props.selectedRegion === 'kalos' ? 'active' : '')}>Kalos</a>
+          <a onClick={this.onMenuClick} data-pkdx="alola" className={"item " + (this.props.selectedRegion === 'alola' ? 'active' : '')}>Alola</a>
         </div>
         {this.renderContent()}
       </div>

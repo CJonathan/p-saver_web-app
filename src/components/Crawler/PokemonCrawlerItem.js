@@ -33,7 +33,7 @@ class PokemonCrawlerItem extends React.Component {
     data.region = this.props.region;
     let pokemon = { ...data.pokemon };
     pokemon.avatar = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.entry}.png`;
-    const res = await pokeApi.get(`/pokemon-species/${data.entry}`);
+    const res = await pokeApi.get(`/pokemon-species/${data.entry}/`);
     pokemon.about = res.data.flavor_text_entries.filter(e => {
       return e.language.name === 'fr';
     })[0].flavor_text;

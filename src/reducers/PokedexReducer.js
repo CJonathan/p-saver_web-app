@@ -6,6 +6,9 @@ const initState = {
   johto: [],
   hoenn: [],
   sinnoh: [],
+  unova: [],
+  kalos: [],
+  alola: [],
 };
 
 export default (state = initState, action) => {
